@@ -1,0 +1,301 @@
+# Sample Queries for Tableau Knowledge MCP
+
+This file contains example queries you can use with your dual-MCP setup.
+Copy and paste these into Claude Desktop to test functionality.
+
+## 🚀 Getting Started Queries
+
+### Test Knowledge Base Connection
+```
+List all books in my technical knowledge base
+```
+
+### Test Tableau Connection
+```
+What datasources are available in my Tableau environment?
+```
+
+### Test Both Together
+```
+Search my technical books for best practices on LOD calculations, 
+then check what fields are available in my Sample-Superstore datasource
+```
+
+---
+
+## 📚 Knowledge Base Only Queries
+
+### Book Discovery
+```
+What books do I have about Python pandas?
+```
+
+```
+Search my technical library for content about data visualization
+```
+
+```
+Do I have any books about machine learning or data science?
+```
+
+### Technical Research
+```
+What does my Tableau book say about table calculations?
+```
+
+```
+Search my Python books for examples of groupby operations
+```
+
+```
+Find information about database normalization in my SQL books
+```
+
+---
+
+## 📊 Tableau Only Queries
+
+### Data Exploration
+```
+Show me the top 10 products by profit in Sample-Superstore
+```
+
+```
+What regions are in my Superstore data and what are their total sales?
+```
+
+```
+List all the fields available in the Sample-Superstore datasource
+```
+
+### Data Analysis
+```
+Which customers have the highest total sales?
+```
+
+```
+Show me sales by category and sub-category
+```
+
+```
+What are the bottom 10 products by profit?
+```
+
+---
+
+## 🎯 Dual-MCP Queries (The Power Combo!)
+
+### Learning + Application
+```
+What are LOD calculation best practices from my Tableau books, 
+then create example FIXED, INCLUDE, and EXCLUDE calculations 
+using my Sample-Superstore data?
+```
+
+```
+Search my books for ranking best practices, then show me 
+the top 5 products by profit within each category
+```
+
+```
+What does my data science book say about outlier detection, 
+and can you check if there are outliers in my Superstore Profit field?
+```
+
+```
+Search my SQL books for JOIN types, then show me an example 
+of how I could join data from multiple Superstore fields
+```
+
+### Data Quality Analysis
+```
+According to my data cleaning books, what are best practices 
+for handling NULL values, and do I have any NULLs in my 
+Superstore Discount or Profit fields?
+```
+
+```
+What does my statistics book say about variance and standard deviation,
+then calculate these for my Sales field by Region
+```
+
+### Dashboard Design
+```
+What are dashboard design best practices from my Tableau books,
+and what KPIs could I build using the fields in my Superstore data?
+```
+
+```
+Search my books for color palette recommendations for data viz,
+then suggest how I should color-code my regional sales analysis
+```
+
+### Performance Optimization
+```
+What does my Tableau performance book say about extract vs live connections,
+and can you analyze my current Superstore datasource structure 
+to recommend improvements?
+```
+
+---
+
+## 📝 Blog Content Creation Queries
+
+### Tutorial Development
+```
+I want to write a blog post about ranking calculations in Tableau.
+Pull examples from my books, then create 3 different ranking 
+scenarios using my Superstore data (overall rank, rank by category, 
+rank by region).
+```
+
+```
+Help me create a tutorial about customer segmentation. 
+Search my marketing analytics books for segmentation techniques,
+then show me how I could segment my Superstore customers 
+based on their purchase behavior.
+```
+
+### Before/After Examples
+```
+I need a blog post showing common Tableau calculation mistakes.
+Find examples from my books of what NOT to do, then demonstrate 
+the correct approach using my Superstore data.
+```
+
+---
+
+## 🔧 Troubleshooting Queries
+
+### Calculation Help
+```
+I'm trying to calculate average sales per customer by region 
+but getting unexpected results. What does my Tableau book say 
+about common averaging mistakes, and can you show me the 
+correct calculation using my data?
+```
+
+### Data Analysis Validation
+```
+I want to verify my profit margin calculations are correct.
+Search my finance books for profit margin formulas, then 
+calculate profit margin using my Superstore Sales and Profit fields.
+```
+
+---
+
+## 🎓 Advanced Multi-Step Queries
+
+### Comprehensive Analysis
+```
+I need to create a complete regional performance dashboard.
+1. Search my Tableau books for regional analysis best practices
+2. Show me all regional data in my Superstore datasource
+3. Calculate key metrics: total sales, profit, profit margin, customer count
+4. Identify top and bottom performers by region
+5. Suggest appropriate visualizations for each metric
+```
+
+### Comparative Research
+```
+I want to understand the difference between RANK() and INDEX() in Tableau.
+1. Search my Tableau books for explanations of both functions
+2. Show me the top 10 products by profit using RANK()
+3. Explain when I should use each function
+4. Demonstrate any performance differences
+```
+
+### Data Quality Assessment
+```
+Help me assess the data quality of my Superstore dataset:
+1. Search my data governance book for data quality dimensions
+2. Check for NULL values across all fields
+3. Identify any duplicate records
+4. Analyze the distribution of values in key fields
+5. Recommend data cleaning steps if needed
+```
+
+---
+
+## 💡 Creative Use Cases
+
+### What-If Analysis
+```
+According to my business analytics books, what are common 
+what-if scenarios for retail analysis? Then show me how 
+I could model a 10% price increase scenario using my Superstore data.
+```
+
+### Cohort Analysis
+```
+Search my customer analytics books for cohort analysis techniques,
+then help me identify customer cohorts in my Superstore data 
+based on first purchase date.
+```
+
+### Trend Analysis
+```
+What does my time series forecasting book say about identifying trends?
+Then analyze my Superstore sales data over time to identify any trends.
+```
+
+---
+
+## 🎯 Tips for Effective Queries
+
+1. **Be Specific**: Reference specific books if you know them
+   - "Search my 'Learning Tableau 2025' book for..."
+
+2. **Combine Theory + Practice**: Ask for both explanation and application
+   - "Explain X from my books, then demonstrate with my data"
+
+3. **Request Examples**: Ask for concrete examples
+   - "Show me 3 different ways to calculate..."
+
+4. **Iterate**: Build on previous answers
+   - "Now apply that same technique to a different field"
+
+5. **Ask for Comparisons**: Compare multiple approaches
+   - "Show me the difference between method A and method B"
+
+---
+
+## 📊 Expected Results
+
+When queries work correctly, you should see:
+
+1. **Knowledge Base Results**: 
+   - Relevant book excerpts
+   - Page numbers and sources
+   - Specific examples from your PDFs
+
+2. **Tableau Results**:
+   - Actual data from your datasources
+   - Field metadata
+   - Query results in tabular format
+
+3. **Synthesized Insights**:
+   - Claude combining both sources
+   - Practical recommendations
+   - Code examples you can use
+
+---
+
+## 🐛 If Queries Don't Work
+
+**Knowledge Base Returns Nothing:**
+- Check if PDFs were indexed correctly
+- Verify server is running (🔌 icon)
+- Try simpler query: "List all books"
+
+**Tableau Returns Errors:**
+- Verify PAT credentials in config
+- Check server URL and site name
+- Test with simpler query: "List datasources"
+
+**Both Servers Show as Disconnected:**
+- Restart Claude Desktop completely
+- Check configuration file paths
+- Review logs for error messages
+
+See [TROUBLESHOOTING.md](../docs/TROUBLESHOOTING.md) for detailed help.

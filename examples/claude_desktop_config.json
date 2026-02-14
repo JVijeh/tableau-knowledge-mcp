@@ -1,0 +1,25 @@
+{
+  "mcpServers": {
+    "technical-knowledge-base": {
+      "command": "C:\\Users\\YOUR_USERNAME\\tableau-knowledge-mcp\\venv\\Scripts\\python.exe",
+      "args": [
+        "C:\\Users\\YOUR_USERNAME\\tableau-knowledge-mcp\\src\\server.py"
+      ]
+    },
+    "tableau-cloud": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-tableau",
+        "--server-url",
+        "https://your-site.online.tableau.com",
+        "--site-name",
+        "your-site-name",
+        "--token-name",
+        "your-token-name",
+        "--token-value",
+        "your-token-secret"
+      ]
+    }
+  }
+}
