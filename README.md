@@ -1,44 +1,44 @@
 # Tableau Analytics Assistant with Technical Knowledge Base
 
-> 🚀 Combine your technical library with live Tableau data analysis using Claude + Model Context Protocol (MCP)
+> Combine your technical library with live Tableau data analysis using Claude and Model Context Protocol (MCP)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![MCP](https://img.shields.io/badge/MCP-enabled-green.svg)](https://modelcontextprotocol.io)
 
-## 🎯 What This Does
+## Overview
 
-Transform your data analysis workflow by asking questions that combine **theoretical knowledge** from your technical books with **live data** from Tableau:
+Transform your data analysis workflow by asking questions that combine theoretical knowledge from your technical books with live data from Tableau. This project enables Claude to search your PDF library and query your Tableau datasources simultaneously.
 
 **Example Questions:**
-- *"What are LOD calculation best practices from my Tableau books, then show me examples using my Sample-Superstore data?"*
-- *"Search my Python books for pandas merge techniques, then analyze which customers appear in multiple regions"*
-- *"According to my data science books, what's the best way to handle outliers, and do I have any in my Profit field?"*
+- "What are LOD calculation best practices from my Tableau books, then show me examples using my Sample-Superstore data?"
+- "Search my Python books for pandas merge techniques, then analyze which customers appear in multiple regions"
+- "According to my data science books, what's the best way to handle outliers, and do I have any in my Profit field?"
 
-**Powered by Two MCP Servers Working Together:**
-1. 📚 **Technical Knowledge Base** - Semantic search across your PDF library
-2. 📊 **Tableau Cloud** - Live queries to your Tableau datasources
+**Architecture:**
+- Technical Knowledge Base MCP - Semantic search across your PDF library using ChromaDB
+- Tableau Cloud MCP - Live queries to your Tableau datasources and metadata
 
-## ✨ Key Features
+## Key Features
 
-- 🔍 **Semantic Search** - Find relevant content across 80+ technical PDFs instantly
-- 📊 **Live Data Queries** - Query Tableau datasources, metadata, and analytics
-- 🧠 **Dual-Context Analysis** - Combine theory with practice in a single conversation
-- 🔒 **Secure** - No credentials stored in code (environment variables only)
-- 🎨 **Claude Desktop Integration** - Works seamlessly with Claude's chat interface
-- ⚡ **Fast** - ChromaDB vector search returns results in <2 seconds
+- **Semantic Search** - Find relevant content across 80+ technical PDFs instantly
+- **Live Data Queries** - Query Tableau datasources, metadata, and analytics
+- **Dual-Context Analysis** - Combine theory with practice in a single conversation
+- **Secure** - No credentials stored in code; uses environment variables only
+- **Claude Desktop Integration** - Works seamlessly with Claude's chat interface
+- **Fast** - ChromaDB vector search returns results in under 2 seconds
 
-## 📋 Prerequisites
+## Prerequisites
 
-- **Python 3.9+** - Check with `python --version`
-- **Tableau Cloud or Server** - With creator license or higher
-- **Tableau Personal Access Token (PAT)** - For API authentication
-- **Claude Desktop** - Download from [claude.ai](https://claude.ai)
-- **PDF Library** - Your collection of technical books (PDF format)
-- **4GB RAM minimum** (8GB recommended for larger libraries)
-- **2GB disk space** - For ChromaDB index storage
+- Python 3.9 or higher
+- Tableau Cloud or Server with creator license or higher
+- Tableau Personal Access Token (PAT) for API authentication
+- Claude Desktop
+- PDF library of technical books
+- 4GB RAM minimum (8GB recommended for larger libraries)
+- 2GB disk space for ChromaDB index storage
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Clone and Setup
 
@@ -86,18 +86,12 @@ code .env
 # Run the indexing script
 python scripts/index_books.py --pdf-dir "/path/to/your/pdfs"
 
-# This will:
-# - Process all PDFs in the directory
-# - Create text chunks with embeddings
-# - Build ChromaDB vector index
-# - Report indexing statistics
-
 # Expected output:
-# 📚 Indexing 83 PDF files...
-# ✅ Successfully indexed: 80 books
-# 📊 Total chunks: 91,100
-# ⚡ Index size: 387MB
-# ✅ Indexing complete!
+# Indexing 83 PDF files...
+# Successfully indexed: 80 books
+# Total chunks: 91,100
+# Index size: 387MB
+# Indexing complete!
 ```
 
 ### 4. Verify Setup
@@ -106,17 +100,17 @@ python scripts/index_books.py --pdf-dir "/path/to/your/pdfs"
 # Run verification script
 bash scripts/verify_setup.sh
 
-# This checks:
-# ✓ Python version
-# ✓ Dependencies installed
-# ✓ ChromaDB index exists
-# ✓ Environment variables set
-# ✓ Tableau credentials valid
+# Checks:
+# - Python version
+# - Dependencies installed
+# - ChromaDB index exists
+# - Environment variables set
+# - Tableau credentials valid
 ```
 
 ### 5. Configure Claude Desktop
 
-**Edit your Claude Desktop configuration file:**
+Edit your Claude Desktop configuration file:
 
 **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`  
 **Mac:** `~/Library/Application Support/Claude/claude_desktop_config.json`
@@ -147,12 +141,12 @@ Add this configuration (update paths to match your system):
 }
 ```
 
-### 6. Restart Claude Desktop and Test!
+### 6. Test the Setup
 
-1. **Completely quit** Claude Desktop (File → Quit)
-2. **Reopen** Claude Desktop
-3. Click the **🔌 plug icon** in the bottom-right corner
-4. Verify both servers show as **connected** ✅
+1. Completely quit Claude Desktop
+2. Reopen Claude Desktop
+3. Click the plug icon in the bottom-right corner
+4. Verify both servers show as connected
 
 **Test with a simple query:**
 ```
@@ -165,37 +159,48 @@ Search my Tableau books for LOD calculation examples,
 then show me the fields available in my Sample-Superstore datasource
 ```
 
-## 📖 Documentation
+## Documentation
 
-- **[Installation Guide](docs/INSTALLATION.md)** - Detailed step-by-step setup
-- **[Architecture](docs/ARCHITECTURE.md)** - How the system works
-- **[Example Queries](docs/EXAMPLE_QUERIES.md)** - 25+ ready-to-use questions
-- **[Troubleshooting](docs/TROUBLESHOOTING.md)** - Common issues and solutions
-- **[Tableau Setup](docs/TABLEAU_SETUP.md)** - Creating Personal Access Tokens
-- **[Contributing](docs/CONTRIBUTING.md)** - How to contribute
+- [Installation Guide](docs/INSTALLATION.md) - Detailed step-by-step setup
+- [Architecture](docs/ARCHITECTURE.md) - How the system works
+- [Example Queries](docs/EXAMPLE_QUERIES.md) - 25+ ready-to-use questions
+- [Troubleshooting](docs/TROUBLESHOOTING.md) - Common issues and solutions
+- [Tableau Setup](docs/TABLEAU_SETUP.md) - Creating Personal Access Tokens
+- [Contributing](docs/CONTRIBUTING.md) - How to contribute
 
-## 🎓 Example Use Cases
+## Example Use Cases
 
-### 📊 Learning + Application
+### Learning + Application
 Ask theoretical questions and immediately see practical examples with your data:
-- "What are the different types of joins explained in my SQL book, then show me examples using my Superstore Orders and Returns tables"
-- "How should I handle NULL values according to my data cleaning book, and do I have any in my Sales field?"
+```
+What are the different types of joins explained in my SQL book, 
+then show me examples using my Superstore Orders and Returns tables
+```
 
-### 📝 Blog Content Creation
+### Blog Content Creation
 Use the assistant to create educational content:
-- "I want to write a blog post about LOD calculations. Pull examples from my Tableau books and create demo queries using my Superstore data"
+```
+I want to write a blog post about LOD calculations. Pull examples from my 
+Tableau books and create demo queries using my Superstore data
+```
 
-### 🔍 Data Exploration
+### Data Exploration
 Combine domain knowledge with data discovery:
-- "What are common customer segmentation techniques from my marketing books, and what segments exist in my customer data?"
+```
+What are common customer segmentation techniques from my marketing books, 
+and what segments exist in my customer data?
+```
 
-### 🐛 Troubleshooting
+### Troubleshooting
 Get help with specific technical challenges:
-- "My RANK() calculation isn't working as expected. What are common mistakes from my Tableau books, and can you review my actual calculation?"
+```
+My RANK() calculation isn't working as expected. What are common mistakes 
+from my Tableau books, and can you review my actual calculation?
+```
 
-See **[examples/sample_queries.txt](examples/sample_queries.txt)** for 25+ complete examples.
+See [examples/sample_queries.txt](examples/sample_queries.txt) for 25+ complete examples.
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ┌─────────────────┐
@@ -218,9 +223,9 @@ See **[examples/sample_queries.txt](examples/sample_queries.txt)** for 25+ compl
 └─────────────┘              └──────────────────┘
 ```
 
-See **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** for detailed system design.
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for detailed system design.
 
-## 🔧 Configuration
+## Configuration
 
 ### Technical Knowledge Base Settings
 
@@ -244,22 +249,22 @@ For large PDF libraries (100+ books):
 - Use `sentence-transformers/all-MiniLM-L6-v2` for speed
 - Use `sentence-transformers/all-mpnet-base-v2` for accuracy
 
-## 🔒 Security Best Practices
+## Security Best Practices
 
-✅ **DO:**
+**DO:**
 - Use `.env` file for all credentials
 - Keep `.env` in `.gitignore`
 - Rotate Tableau PATs regularly
-- Use dedicated PAT for this project (not your personal PAT)
+- Use dedicated PAT for this project
 - Set PAT expiration dates
 
-❌ **DON'T:**
+**DON'T:**
 - Commit `.env` files to Git
 - Share credentials in code or documentation
 - Use production PATs for testing
 - Store credentials in claude_desktop_config.json
 
-## 🧪 Testing
+## Testing
 
 ```bash
 # Run all tests
@@ -272,60 +277,59 @@ pytest --cov=src tests/
 pytest tests/test_server.py -v
 ```
 
-## 🤝 Contributing
+## Contributing
 
-Contributions are welcome! See **[CONTRIBUTING.md](docs/CONTRIBUTING.md)** for guidelines.
+Contributions are welcome! See [CONTRIBUTING.md](docs/CONTRIBUTING.md) for guidelines.
 
 **Areas for contribution:**
-- 📚 Additional PDF processing formats
-- 🎨 Web UI for configuration
-- 📊 Support for other BI tools (Power BI, Looker)
-- 🧪 Expanded test coverage
-- 📝 Documentation improvements
+- Additional PDF processing formats
+- Web UI for configuration
+- Support for other BI tools (Power BI, Looker)
+- Expanded test coverage
+- Documentation improvements
 
-## 📊 Project Stats
+## Project Stats
 
-- **83 books** indexed
-- **91,100 text chunks** searchable
-- **13 Tableau datasources** connected
-- **<2 second** average query time
-- **387MB** ChromaDB index size
-- **80/83** successful PDF indexing rate
+- 83 books indexed
+- 91,100 text chunks searchable
+- 13 Tableau datasources connected
+- Under 2 second average query time
+- 387MB ChromaDB index size
+- 80/83 successful PDF indexing rate
 
-## 🗺️ Roadmap
+## Roadmap
 
-- [ ] Web UI for setup and testing
-- [ ] Support for Power BI datasets
-- [ ] Multi-language PDF support
-- [ ] Custom embedding models
-- [ ] Docker containerization
-- [ ] Cloud deployment guide
+- Web UI for setup and testing
+- Support for Power BI datasets
+- Multi-language PDF support
+- Custom embedding models
+- Docker containerization
+- Cloud deployment guide
 
-## 📝 License
+## License
 
-This project is licensed under the MIT License - see the **[LICENSE](LICENSE)** file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👤 Author
+## Author
 
 **Joshua Vijeh**
 - Blog: [DataDevDiary.com](https://datadevdiary.com)
-- GitHub: [@JVijeh](https://github.com/JVijeh)
-- LinkedIn: [Joshua Vijeh](https://www.linkedin.com/in/joshua-vijeh-0512137/)
+- GitHub: [@yourusername](https://github.com/yourusername)
+- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
-- **Repo built with the help of Claude.ai by Anthropic**
 - Built with [Anthropic's Model Context Protocol](https://modelcontextprotocol.io)
 - Uses [ChromaDB](https://www.trychroma.com/) for vector search
 - Tableau MCP by [@modelcontextprotocol](https://github.com/modelcontextprotocol)
 - Sentence Transformers by [UKPLab](https://www.sbert.net/)
 
-## 📮 Support
+## Support
 
-- 🐛 **Bug reports:** [GitHub Issues](https://github.com/yourusername/tableau-knowledge-mcp/issues)
-- 💬 **Questions:** [GitHub Discussions](https://github.com/yourusername/tableau-knowledge-mcp/discussions)
-- 📧 **Email:** datadevdiary@gmail.com
+- Bug reports: [GitHub Issues](https://github.com/yourusername/tableau-knowledge-mcp/issues)
+- Questions: [GitHub Discussions](https://github.com/yourusername/tableau-knowledge-mcp/discussions)
+- Email: your.email@example.com
 
 ---
 
-⭐ **If this project helped you, please star the repository!** ⭐
+If this project helped you, please star the repository!
