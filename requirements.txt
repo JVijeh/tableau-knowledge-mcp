@@ -1,32 +1,22 @@
-# Core MCP Server Dependencies
+# Core MCP Dependencies
 mcp>=0.1.0
 
-# Vector Database & Embeddings
+# Vector Database
 chromadb==0.4.18
-sentence-transformers==2.2.2
+
+# Embeddings
+# Must be 2.7.0+ for huggingface_hub compatibility
+sentence-transformers>=2.7.0
 
 # PDF Processing
 PyPDF2==3.0.1
-pdfplumber==0.10.3
 
-# Environment Management
+# Environment Variables
 python-dotenv==1.0.0
 
-# HTTP Requests (for Tableau API if needed)
-requests==2.31.0
+# NumPy - CRITICAL: Must be below 2.0 for compatibility
+# NumPy 2.0 removed np.float_ which breaks sentence-transformers and chromadb
+numpy<2.0
 
-# Data Processing
-pandas==2.1.4
-
-# Testing (optional but recommended)
-pytest==7.4.3
-pytest-asyncio==0.21.1
-pytest-cov==4.1.0
-
-# Code Quality (optional)
-black==23.12.1
-flake8==7.0.0
-mypy==1.7.1
-
-# Logging
-loguru==0.7.2
+# Testing (optional)
+pytest>=7.0.0

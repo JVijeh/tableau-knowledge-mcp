@@ -1,25 +1,33 @@
 {
   "mcpServers": {
-    "technical-knowledge-base": {
-      "command": "C:\\Users\\YOUR_USERNAME\\tableau-knowledge-mcp\\venv\\Scripts\\python.exe",
-      "args": [
-        "C:\\Users\\YOUR_USERNAME\\tableau-knowledge-mcp\\src\\server.py"
-      ]
-    },
-    "tableau-cloud": {
+    "tableau": {
       "command": "npx",
       "args": [
         "-y",
-        "@modelcontextprotocol/server-tableau",
-        "--server-url",
-        "https://your-site.online.tableau.com",
-        "--site-name",
-        "your-site-name",
-        "--token-name",
-        "your-token-name",
-        "--token-value",
-        "your-token-secret"
-      ]
+        "@tableau/mcp-server@latest"
+      ],
+      "env": {
+        "SERVER": "https://your-site.online.tableau.com",
+        "SITE_NAME": "your-site-name",
+        "PAT_NAME": "your-token-name",
+        "PAT_VALUE": "your-token-secret"
+      }
+    },
+    "technical-knowledge-base": {
+      "command": "C:\\Users\\{username}\\tableau-knowledge-mcp\\venv\\Scripts\\python.exe",
+      "args": [
+        "C:\\Users\\{username}\\tableau-knowledge-mcp\\src\\server.py"
+      ],
+      "env": {
+        "CHROMA_DB_PATH": "C:\\Users\\{username}\\tableau-knowledge-mcp\\chroma_db",
+        "PDF_LIBRARY_PATH": "C:\\Users\\{username}\\books",
+        "EMBEDDING_MODEL": "sentence-transformers/all-MiniLM-L6-v2",
+        "MAX_SEARCH_RESULTS": "5"
+      }
     }
+  },
+  "preferences": {
+    "coworkScheduledTasksEnabled": false,
+    "sidebarMode": "chat"
   }
 }
