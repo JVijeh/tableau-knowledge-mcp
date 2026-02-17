@@ -8,6 +8,8 @@
 
 ## What This Does
 
+> **Important:** This repository provides the **framework and tools only** - no PDF books or copyrighted materials are included. You will need to provide your own collection of technical PDFs. The stats referenced throughout this README (95 books, 75,003 chunks, etc.) reflect the author's personal library and will vary based on your own collection.
+
 Transform your data analysis workflow by asking questions that combine **theoretical knowledge** from your technical books with **live data** from Tableau:
 
 **Example Questions:**
@@ -36,7 +38,7 @@ Transform your data analysis workflow by asking questions that combine **theoret
 - **Tableau Cloud or Server** - With creator license or higher
 - **Tableau Personal Access Token (PAT)** - For API authentication
 - **Claude Desktop** - Download from [claude.ai](https://claude.ai)
-- **PDF Library** - Your collection of technical books (PDF format)
+- **PDF Library** - Your own collection of technical books in PDF format (not included - see note above)
 - **4GB RAM minimum** (8GB recommended for larger libraries)
 - **2GB disk space** - For ChromaDB index storage
 
