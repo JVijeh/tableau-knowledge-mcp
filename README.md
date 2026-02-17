@@ -234,9 +234,9 @@ Ask theoretical questions and immediately see practical examples with your data:
 - "What are the different types of joins explained in my SQL book, then show me examples using my Superstore data"
 - "How should I handle NULL values according to my data cleaning book, and do I have any in my Sales field?"
 
-### Blog Content Creation
+### Content Creation
 Use the assistant to create educational content:
-- "I want to write a blog post about LOD calculations. Pull examples from my Tableau books and create demo queries using my Superstore data"
+- "I want to write a post about LOD calculations. Pull examples from my Tableau books and create demo queries using my Superstore data"
 
 ### Data Exploration
 Combine domain knowledge with data discovery:
