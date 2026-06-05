@@ -700,8 +700,8 @@ When reporting issues, include:
 
 ### Where to Get Help
 
-- **GitHub Issues:** https://github.com/yourusername/tableau-knowledge-mcp/issues
-- **Discussions:** https://github.com/yourusername/tableau-knowledge-mcp/discussions
+- **GitHub Issues:** https://github.com/JVijeh/tableau-knowledge-mcp/issues
+- **Discussions:** https://github.com/JVijeh/tableau-knowledge-mcp/discussions
 - **Documentation:** Review [INSTALLATION.md](INSTALLATION.md)
 - **Tableau Support:** For Tableau-specific issues
 
