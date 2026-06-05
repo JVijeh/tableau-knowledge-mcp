@@ -509,9 +509,9 @@ For common issues and solutions, see:
 
 ## Getting Help
 
-- **GitHub Issues:** https://github.com/yourusername/tableau-knowledge-mcp/issues
-- **Discussions:** https://github.com/yourusername/tableau-knowledge-mcp/discussions
-- **Email:** your.email@example.com
+- **GitHub Issues:** https://github.com/JVijeh/tableau-knowledge-mcp/issues
+- **Discussions:** https://github.com/JVijeh/tableau-knowledge-mcp/discussions
+- **Email:** datadevdiary@gmail.com
 
 ---
 
