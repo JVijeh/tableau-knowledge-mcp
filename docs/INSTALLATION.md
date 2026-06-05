@@ -56,14 +56,14 @@ Complete step-by-step instructions for setting up the Tableau Technical Knowledg
 
 ```bash
 # Clone from GitHub
-git clone https://github.com/yourusername/tableau-knowledge-mcp.git
+git clone https://github.com/JVijeh/tableau-knowledge-mcp.git
 
 # Navigate into directory
 cd tableau-knowledge-mcp
 ```
 
 **Alternative: Download ZIP**
-1. Go to https://github.com/yourusername/tableau-knowledge-mcp
+1. Go to https://github.com/JVijeh/tableau-knowledge-mcp
 2. Click "Code" → "Download ZIP"
 3. Extract to your desired location
 4. Open terminal/command prompt in that directory
