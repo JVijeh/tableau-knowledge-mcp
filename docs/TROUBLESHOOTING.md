@@ -106,6 +106,8 @@ python -c "import numpy; print(numpy.__version__)"
 
 Should report a version below `2.0.0`.
 
+> **Note for Python 3.13+ users:** Pinning `numpy<2.0` will cause pip to compile NumPy from source on Python 3.13+, which often fails on Windows even with C++ Build Tools installed (no pre-built wheels exist for `numpy<2.0` on Python 3.13). If you're on Python 3.13 and hit compilation errors during NumPy install, see [Python Version Wheel Availability](#python-version-wheel-availability) — the recommended fix is to use Python 3.12 instead.
+
 ---
 
 ### LangChain Import Path Errors
@@ -155,7 +157,11 @@ Could not find a version that satisfies the requirement
 ERROR: No matching distribution found
 ```
 
-Or pip attempts to build from source for many packages simultaneously, even with C++ Build Tools installed.
+Or pip attempts to build from source for many packages simultaneously, even with C++ Build Tools installed. NumPy compilation in particular may fail with errors like:
+
+```
+FAILED: numpy/core/libargfunc.dispatch.h_AVX512_SKX.a.p/meson-generated_argfunc.dispatch.c.obj
+```
 
 **Cause:**
 
@@ -167,11 +173,27 @@ Use a more established Python version for the virtual environment. Python 3.11 o
 
 1. Install Python 3.11 or 3.12 alongside your current version from <https://www.python.org/downloads/>
 
-2. Create the virtual environment with the specific version:
+2. Remove the existing virtual environment and recreate it with the specific version:
 
 ```
-py -3.11 -m venv venv
-venv\Scripts\activate
+# Deactivate current venv if active
+deactivate
+
+# Remove old venv (Windows)
+rmdir /s /q venv
+
+# Remove old venv (Mac/Linux)
+rm -rf venv
+
+# Create new venv with Python 3.12 specifically
+py -3.12 -m venv venv          # Windows
+python3.12 -m venv venv        # Mac/Linux
+
+# Activate it
+venv\Scripts\activate          # Windows
+source venv/bin/activate       # Mac/Linux
+
+# Reinstall dependencies
 pip install -r requirements.txt
 ```
 
@@ -181,7 +203,9 @@ pip install -r requirements.txt
 python --version
 ```
 
-Should show the version you targeted (e.g., `Python 3.11.x`).
+Should show the version you targeted (e.g., `Python 3.12.x`).
+
+> **Note:** This issue commonly surfaces when `numpy<2.0` is pinned (per [NumPy 2.0 Compatibility Errors](#numpy-20-compatibility-errors)) and you're using Python 3.13+, since NumPy 1.x has no pre-built wheels for Python 3.13. The two issues compound: the NumPy pin forces a from-source build, which then fails on the newer Python version.
 
 ---
 
