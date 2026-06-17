@@ -4,7 +4,7 @@ Common issues and solutions for the Tableau Technical Knowledge Base MCP.
 
 ## Table of Contents
 
-- [Installation Issues](#installation-issues)  
+- [Installation Issues](#installation-issues)
 - [MCP Connection Issues](#mcp-connection-issues)
 - [PDF Indexing Issues](#pdf-indexing-issues)
 - [Tableau Connection Issues](#tableau-connection-issues)
@@ -14,24 +14,19 @@ Common issues and solutions for the Tableau Technical Knowledge Base MCP.
 - [Claude Desktop Issues](#claude-desktop-issues)
 
 ---
-## Installation Issues
 
-[#installation-issues](#installation-issues)
+## Installation Issues
 
 Problems that prevent the project from installing successfully. These issues occur during `pip install` or `setup.bat` execution, before you can run the indexer or start the MCP server.
 
----
-
 ### `metadata-generation-failed` During pip install (Missing C++ Build Tools)
-
-[#metadata-generation-failed-missing-cpp-build-tools](#metadata-generation-failed-missing-cpp-build-tools)
 
 **Symptom:**
 
 ```
 ERROR: Failed building wheel for chromadb
 ERROR: metadata-generation-failed
-WARNING: Failed to activate VS environment: Could not find 
+WARNING: Failed to activate VS environment: Could not find
 C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe
 ```
 
@@ -77,8 +72,6 @@ A fresh Windows install doesn't include a C++ compiler by default. When pip enco
 
 ### NumPy 2.0 Compatibility Errors
 
-[#numpy-2-0-compatibility-errors](#numpy-2-0-compatibility-errors)
-
 **Symptom:**
 
 ```
@@ -117,8 +110,6 @@ Should report a version below `2.0.0`.
 
 ### LangChain Import Path Errors
 
-[#langchain-import-path-errors](#langchain-import-path-errors)
-
 **Symptom:**
 
 ```
@@ -154,8 +145,6 @@ The bundled scripts in this repository already use the updated imports.
 ---
 
 ### Python Version Wheel Availability
-
-[#python-version-wheel-availability](#python-version-wheel-availability)
 
 **Symptom:**
 
@@ -195,6 +184,7 @@ python --version
 Should show the version you targeted (e.g., `Python 3.11.x`).
 
 ---
+
 ## MCP Connection Issues
 
 ### Servers Not Showing in Claude Desktop
@@ -202,6 +192,7 @@ Should show the version you targeted (e.g., `Python 3.11.x`).
 **Symptom:** Plug icon shows no servers or servers appear disconnected
 
 **Possible Causes:**
+
 1. Claude Desktop not restarted after configuration
 2. Configuration file in wrong location
 3. Syntax errors in configuration JSON
@@ -212,20 +203,23 @@ Should show the version you targeted (e.g., `Python 3.11.x`).
 **1. Verify Configuration File Location**
 
 Windows:
-```powershell
+
+```
 notepad %APPDATA%\Claude\claude_desktop_config.json
 ```
 
 Mac:
-```bash
+
+```
 open ~/Library/Application\ Support/Claude/claude_desktop_config.json
 ```
 
 **2. Validate JSON Syntax**
 
-Copy your configuration and paste into: https://jsonlint.com/
+Copy your configuration and paste into: <https://jsonlint.com/>
 
 Common mistakes:
+
 - Missing commas between sections
 - Extra comma after last item
 - Unmatched brackets `{` `}`
@@ -236,17 +230,20 @@ Common mistakes:
 Paths must be absolute and properly escaped:
 
 **Windows (wrong):**
-```json
+
+```
 "command": "C:\Users\jvije\venv\Scripts\python.exe"  ❌
 ```
 
 **Windows (correct):**
-```json
+
+```
 "command": "C:\\Users\\jvije\\venv\\Scripts\\python.exe"  ✅
 ```
 
 **Mac (correct):**
-```json
+
+```
 "command": "/Users/jvije/venv/bin/python"  ✅
 ```
 
@@ -267,7 +264,7 @@ Paths must be absolute and properly escaped:
 
 Verify Python path points to your virtual environment:
 
-```bash
+```
 # Should be inside your venv folder
 which python  # Mac/Linux
 where python  # Windows
@@ -275,32 +272,34 @@ where python  # Windows
 
 **Check 2: ChromaDB Index Exists**
 
-```bash
+```
 ls chroma_db/  # Mac/Linux
 dir chroma_db\  # Windows
 ```
 
 If empty or missing:
-```bash
+
+```
 python scripts/index_books.py --pdf-dir "/path/to/pdfs"
 ```
 
 **Check 3: Dependencies Installed**
 
-```bash
+```
 # Activate virtual environment first!
 pip list | grep chromadb
 pip list | grep sentence-transformers
 ```
 
 If missing:
-```bash
+
+```
 pip install -r requirements.txt
 ```
 
 **Check 4: Test Server Manually**
 
-```bash
+```
 cd /path/to/tableau-knowledge-mcp
 source venv/bin/activate  # Mac/Linux
 venv\Scripts\activate     # Windows
@@ -317,16 +316,17 @@ Look for error messages in the output.
 
 **Check 1: Node.js and npm Installed**
 
-```bash
+```
 node --version
 npm --version
 ```
 
-If not installed: https://nodejs.org/
+If not installed: <https://nodejs.org/>
 
 **Check 2: Credentials in Configuration**
 
 Verify in `claude_desktop_config.json`:
+
 - `--server-url` is correct (include https://)
 - `--site-name` matches your site
 - `--token-name` and `--token-value` are correct
@@ -335,7 +335,7 @@ Verify in `claude_desktop_config.json`:
 
 Create a test file `test-tableau.js`:
 
-```javascript
+```
 const args = [
   "--server-url", "https://your-site.online.tableau.com",
   "--site-name", "your-site-name",
@@ -347,7 +347,8 @@ console.log("Testing Tableau connection with:", args);
 ```
 
 Run:
-```bash
+
+```
 npx -y @modelcontextprotocol/server-tableau --help
 ```
 
@@ -359,17 +360,18 @@ Should show help text without errors.
 
 ### "No module named 'PyPDF2'"
 
-**Symptom:** ImportError when running index_books.py
+**Symptom:** ImportError when running `index_books.py`
 
 **Solution:**
 
-```bash
+```
 # Make sure virtual environment is activated!
 pip install -r requirements.txt
 ```
 
 Verify installation:
-```bash
+
+```
 python -c "import PyPDF2; print('PyPDF2 installed')"
 ```
 
@@ -380,6 +382,7 @@ python -c "import PyPDF2; print('PyPDF2 installed')"
 **Symptom:** Error accessing PDF files
 
 **Causes:**
+
 1. PDFs are open in another program
 2. Insufficient file permissions
 3. Files are encrypted/password-protected
@@ -388,9 +391,11 @@ python -c "import PyPDF2; print('PyPDF2 installed')"
 
 1. Close all PDF viewers
 2. Check file permissions:
-   ```bash
-   ls -l /path/to/pdfs/*.pdf  # Mac/Linux
-   ```
+
+```
+ls -l /path/to/pdfs/*.pdf  # Mac/Linux
+```
+
 3. Remove password protection from PDFs
 4. Run with appropriate permissions (avoid using sudo unless necessary)
 
@@ -407,7 +412,7 @@ python -c "import PyPDF2; print('PyPDF2 installed')"
    - Tools: Adobe Acrobat, Abbyy FineReader
 
 2. **Corrupted PDF files**
-   - Solution: Try opening in PDF viewer, if it fails, file is corrupted
+   - Solution: Try opening in PDF viewer; if it fails, file is corrupted
    - Re-download or find another copy
 
 3. **Encrypted/Protected PDFs**
@@ -419,7 +424,8 @@ python -c "import PyPDF2; print('PyPDF2 installed')"
    - Skip or add OCR
 
 **View indexing errors:**
-```bash
+
+```
 python scripts/index_books.py --pdf-dir "/path" 2>&1 | tee indexing.log
 ```
 
@@ -447,11 +453,11 @@ Review `indexing.log` for specific errors.
 
 4. **Embedding model downloading**
    - First run downloads ~500MB model
-   - Solution: Wait for initial download, subsequent runs faster
+   - Solution: Wait for initial download; subsequent runs are faster
 
 **Speed improvements:**
 
-```env
+```
 # In .env file
 BATCH_SIZE=50           # Process more at once
 CHUNK_SIZE=1500         # Create fewer chunks
@@ -470,7 +476,8 @@ CHUNK_SIZE=1500         # Create fewer chunks
 **1. Verify Credentials**
 
 Check `.env` file:
-```bash
+
+```
 cat .env | grep TABLEAU  # Mac/Linux
 type .env | findstr TABLEAU  # Windows
 ```
@@ -487,6 +494,7 @@ All four variables must be set correctly.
 **3. Regenerate Token**
 
 If token expired:
+
 1. Create new PAT in Tableau
 2. Update `.env` with new secret
 3. Restart Claude Desktop
@@ -495,7 +503,7 @@ If token expired:
 
 Common mistake: Including `/site/` or full URL
 
-```env
+```
 # WRONG:
 TABLEAU_SITE_NAME=/site/mycompany
 
@@ -513,7 +521,7 @@ TABLEAU_SITE_NAME=mycompany
 
 **1. Verify Server URL**
 
-```env
+```
 # Must include https:// and correct domain
 TABLEAU_SERVER_URL=https://10az.online.tableau.com
 
@@ -524,13 +532,13 @@ TABLEAU_SERVER_URL=https://10az.online.tableau.com/site/mysite  ❌ (has path)
 
 **2. Check Internet Connection**
 
-```bash
+```
 ping your-site.online.tableau.com
 ```
 
 **3. Verify Tableau Server is Running**
 
-Visit your Tableau URL in a browser - should load login page.
+Visit your Tableau URL in a browser — should load login page.
 
 ---
 
@@ -539,6 +547,7 @@ Visit your Tableau URL in a browser - should load login page.
 **Symptom:** Queries hang or timeout after 30 seconds
 
 **Causes:**
+
 1. Slow internet connection
 2. Large dataset queries
 3. Firewall blocking API calls
@@ -547,14 +556,16 @@ Visit your Tableau URL in a browser - should load login page.
 **Solutions:**
 
 1. Test connection speed to Tableau:
-   ```bash
-   curl -w "@-" -o /dev/null -s "https://your-site.online.tableau.com"
-   ```
+
+```
+curl -w "@-" -o /dev/null -s "https://your-site.online.tableau.com"
+```
 
 2. Try simpler queries first:
-   ```
-   List all datasources
-   ```
+
+```
+List all datasources
+```
 
 3. Check firewall settings (corporate networks)
 
@@ -573,7 +584,8 @@ Visit your Tableau URL in a browser - should load login page.
 1. **ChromaDB index empty or corrupted**
 
    Check index size:
-   ```bash
+
+   ```
    du -sh chroma_db  # Mac/Linux
    dir chroma_db     # Windows
    ```
@@ -581,7 +593,8 @@ Visit your Tableau URL in a browser - should load login page.
    Should be 100MB+ for a decent library.
 
    Solution: Reindex
-   ```bash
+
+   ```
    python scripts/index_books.py --pdf-dir "/path" --reindex
    ```
 
@@ -610,7 +623,7 @@ Visit your Tableau URL in a browser - should load login page.
 
 2. **Adjust MAX_SEARCH_RESULTS**
 
-   ```env
+   ```
    MAX_SEARCH_RESULTS=10  # Get more results to review
    ```
 
@@ -620,13 +633,14 @@ Visit your Tableau URL in a browser - should load login page.
 
 4. **Try different embedding model**
 
-   ```env
+   ```
    # More accurate but slower:
    EMBEDDING_MODEL=sentence-transformers/all-mpnet-base-v2
    ```
 
    Then reindex:
-   ```bash
+
+   ```
    python scripts/index_books.py --pdf-dir "/path" --reindex
    ```
 
@@ -641,6 +655,7 @@ Visit your Tableau URL in a browser - should load login page.
 1. **Datasource name wrong**
 
    List available datasources first:
+
    ```
    What datasources are available?
    ```
@@ -668,17 +683,20 @@ Visit your Tableau URL in a browser - should load login page.
 **For Knowledge Base:**
 
 1. **Reduce search results**
-   ```env
+
+   ```
    MAX_SEARCH_RESULTS=3
    ```
 
 2. **Use faster embedding model**
-   ```env
+
+   ```
    EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
    ```
 
 3. **Optimize chunk size**
-   ```env
+
+   ```
    CHUNK_SIZE=1500  # Fewer chunks = faster search
    ```
 
@@ -699,7 +717,8 @@ Visit your Tableau URL in a browser - should load login page.
 1. **Reduce embedding model memory**
 
    Smaller model:
-   ```env
+
+   ```
    EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
    ```
 
@@ -726,25 +745,29 @@ Visit your Tableau URL in a browser - should load login page.
 **Solutions:**
 
 **Windows:**
-```bash
+
+```
 # Try:
 python3 --version
 py --version
 ```
 
 Add Python to PATH:
+
 1. Search "Environment Variables"
 2. Edit System PATH
 3. Add Python installation directory
 
 **Mac:**
-```bash
+
+```
 # Install Python 3:
 brew install python3
 ```
 
 **Linux:**
-```bash
+
+```
 sudo apt-get install python3
 ```
 
@@ -755,7 +778,8 @@ sudo apt-get install python3
 **Symptom:** `(venv)` doesn't appear in prompt
 
 **Windows PowerShell:**
-```powershell
+
+```
 # Enable script execution:
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
@@ -764,12 +788,14 @@ venv\Scripts\activate
 ```
 
 **Windows CMD:**
-```cmd
+
+```
 venv\Scripts\activate.bat
 ```
 
 **Mac/Linux:**
-```bash
+
+```
 # Make sure you're using source:
 source venv/bin/activate
 
@@ -786,22 +812,19 @@ source venv/bin/activate
 **Solutions:**
 
 1. **Verify .env exists**
-   ```bash
-   ls -la  # Mac/Linux (shows hidden files)
-   dir /a  # Windows (shows hidden files)
-   ```
 
 2. **Check file location**
-   
+
    Must be in project root, same directory as `src/` and `scripts/`
 
 3. **Create from template**
-   ```bash
+
+   ```
    cp .env.example .env
    ```
 
 4. **Check file name**
-   
+
    - Should be `.env` (with dot)
    - Not `env.txt` or `.env.txt`
 
@@ -824,12 +847,13 @@ source venv/bin/activate
 2. **Check file location**
 
    Make sure editing the right file:
+
    - Windows: `%APPDATA%\Claude\claude_desktop_config.json`
    - Mac: `~/Library/Application Support/Claude/claude_desktop_config.json`
 
 3. **Validate JSON**
 
-   Use https://jsonlint.com/ to check for syntax errors
+   Use <https://jsonlint.com/> to check for syntax errors
 
 ---
 
@@ -842,13 +866,15 @@ source venv/bin/activate
 Configuration must point to **virtual environment Python**, not system Python:
 
 **Wrong:**
-```json
+
+```
 "command": "python"  ❌
 "command": "/usr/bin/python3"  ❌
 ```
 
 **Right:**
-```json
+
+```
 "command": "C:\\Users\\jvije\\tableau-knowledge-mcp\\venv\\Scripts\\python.exe"  ✅
 ```
 
@@ -861,7 +887,8 @@ Configuration must point to **virtual environment Python**, not system Python:
 When reporting issues, include:
 
 1. **System information:**
-   ```bash
+
+   ```
    python --version
    pip list
    ```
@@ -881,14 +908,15 @@ When reporting issues, include:
 
 ### Where to Get Help
 
-- **GitHub Issues:** https://github.com/JVijeh/tableau-knowledge-mcp/issues
-- **Discussions:** https://github.com/JVijeh/tableau-knowledge-mcp/discussions
+- **GitHub Issues:** <https://github.com/JVijeh/tableau-knowledge-mcp/issues>
+- **Discussions:** <https://github.com/JVijeh/tableau-knowledge-mcp/discussions>
 - **Documentation:** Review [INSTALLATION.md](INSTALLATION.md)
 - **Tableau Support:** For Tableau-specific issues
 
 ---
 
 **Still stuck?** Open a GitHub issue with:
+
 - Operating system and version
 - Python version
 - Error messages
