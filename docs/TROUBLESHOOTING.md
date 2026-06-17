@@ -4,6 +4,7 @@ Common issues and solutions for the Tableau Technical Knowledge Base MCP.
 
 ## Table of Contents
 
+- [Installation Issues](#installation-issues)  
 - [MCP Connection Issues](#mcp-connection-issues)
 - [PDF Indexing Issues](#pdf-indexing-issues)
 - [Tableau Connection Issues](#tableau-connection-issues)
@@ -13,7 +14,187 @@ Common issues and solutions for the Tableau Technical Knowledge Base MCP.
 - [Claude Desktop Issues](#claude-desktop-issues)
 
 ---
+## Installation Issues
 
+[#installation-issues](#installation-issues)
+
+Problems that prevent the project from installing successfully. These issues occur during `pip install` or `setup.bat` execution, before you can run the indexer or start the MCP server.
+
+---
+
+### `metadata-generation-failed` During pip install (Missing C++ Build Tools)
+
+[#metadata-generation-failed-missing-cpp-build-tools](#metadata-generation-failed-missing-cpp-build-tools)
+
+**Symptom:**
+
+```
+ERROR: Failed building wheel for chromadb
+ERROR: metadata-generation-failed
+WARNING: Failed to activate VS environment: Could not find 
+C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe
+```
+
+May appear when installing ChromaDB, `hnswlib`, `onnxruntime`, `tokenizers`, or other packages with native C++ dependencies.
+
+**Cause:**
+
+Windows is missing the Microsoft Visual C++ Build Tools. Several Python packages in this project rely on native C++ extensions that must be compiled from source if no pre-built wheel is available for your Python version. Without a C++ compiler installed, the build step fails.
+
+**Solution:**
+
+1. Download Microsoft C++ Build Tools from:
+   <https://visualstudio.microsoft.com/visual-cpp-build-tools/>
+
+2. Run the installer
+
+3. In the workload selector, check **"Desktop development with C++"**
+
+4. Click Install (download is approximately 6GB and takes 10-20 minutes)
+
+5. **Restart your computer** — this is required for environment variables to register
+
+6. Reopen your terminal, activate your virtual environment, and re-run setup:
+
+```
+venv\Scripts\activate
+setup.bat
+```
+
+**Verification:**
+
+After installation, you can confirm `vswhere.exe` exists at:
+
+```
+C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe
+```
+
+**Why this happens:**
+
+A fresh Windows install doesn't include a C++ compiler by default. When pip encounters a package without a pre-built wheel for your specific Python version and Windows architecture, it falls back to compiling from source — which requires the Build Tools. This is especially common on newer Python versions (3.12+) where wheel availability lags behind release.
+
+---
+
+### NumPy 2.0 Compatibility Errors
+
+[#numpy-2-0-compatibility-errors](#numpy-2-0-compatibility-errors)
+
+**Symptom:**
+
+```
+AttributeError: module 'numpy' has no attribute 'float_'
+```
+
+Or similar errors referencing missing NumPy type aliases. Often appears during PDF indexing or when the embedding model loads.
+
+**Cause:**
+
+NumPy 2.0 (released June 2024) removed several deprecated type aliases (`np.float_`, `np.int_`, `np.bool_`, etc.) that older versions of `sentence-transformers` and ChromaDB still depend on. Everything installs without errors, then fails at runtime.
+
+**Solution:**
+
+Pin NumPy to a version below 2.0 in your `requirements.txt`:
+
+```
+numpy<2.0
+```
+
+Then reinstall:
+
+```
+pip install -r requirements.txt --force-reinstall
+```
+
+**Verification:**
+
+```
+python -c "import numpy; print(numpy.__version__)"
+```
+
+Should report a version below `2.0.0`.
+
+---
+
+### LangChain Import Path Errors
+
+[#langchain-import-path-errors](#langchain-import-path-errors)
+
+**Symptom:**
+
+```
+ModuleNotFoundError: No module named 'langchain.text_splitter'
+```
+
+Or similar errors about LangChain submodules not being found.
+
+**Cause:**
+
+LangChain restructured its package layout starting with the 0.1.x release. Several modules that were once part of the main `langchain` package are now distributed in separate sub-packages such as `langchain-text-splitters`, `langchain-community`, and `langchain-core`. Older code referencing the old paths breaks against newer installations.
+
+**Solution:**
+
+Install the relocated sub-packages:
+
+```
+pip install langchain-text-splitters langchain-community
+```
+
+Then update import statements in any custom scripts:
+
+```python
+# Old:
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+
+# New:
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+```
+
+The bundled scripts in this repository already use the updated imports.
+
+---
+
+### Python Version Wheel Availability
+
+[#python-version-wheel-availability](#python-version-wheel-availability)
+
+**Symptom:**
+
+Multiple packages fail to install with messages like:
+
+```
+Could not find a version that satisfies the requirement
+ERROR: No matching distribution found
+```
+
+Or pip attempts to build from source for many packages simultaneously, even with C++ Build Tools installed.
+
+**Cause:**
+
+Pre-built Python wheels for Windows lag behind new Python releases. If you're using a very recent Python version (e.g., 3.13 shortly after release), many packages may not yet have wheels available, forcing pip to compile each from source — which is slow and error-prone even when Build Tools are installed.
+
+**Solution:**
+
+Use a more established Python version for the virtual environment. Python 3.11 or 3.12 typically have the broadest wheel availability:
+
+1. Install Python 3.11 or 3.12 alongside your current version from <https://www.python.org/downloads/>
+
+2. Create the virtual environment with the specific version:
+
+```
+py -3.11 -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+**Verification:**
+
+```
+python --version
+```
+
+Should show the version you targeted (e.g., `Python 3.11.x`).
+
+---
 ## MCP Connection Issues
 
 ### Servers Not Showing in Claude Desktop
